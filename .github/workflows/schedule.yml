@@ -6,7 +6,7 @@ on:
     - cron: "15 4 * * 0" # run every Sunday at 4:15am
 
 jobs:
-  build:
+  create-archive:
     runs-on: ubuntu-latest # use the GitHub hosted runners
     steps:
       - name: Create the latest archive
