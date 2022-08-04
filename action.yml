@@ -1,0 +1,79 @@
+name: "Skilled Teleportation"
+description: "Generate an archive of GitHub Skills to move to GitHub Enterprise Server."
+author: "Natalie Somersall (@some-natalie)"
+branding:
+  color: green
+  icon: book-open
+
+inputs:
+  list_file:
+    description: "The list of additional skills to export."
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout the repo"
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository }}
+        token: ${{ github.token }}
+
+    - name: "Setup actions-sync"
+      shell: bash
+      run: |
+        # get the latest release
+        curl \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ github.token }}" \
+          https://api.github.com/repos/actions/actions-sync/releases/latest | \
+        jq -r '.assets[].browser_download_url' | \
+        grep "linux_amd64" | \
+        xargs wget
+
+        # untar the release
+        tar -xzf *_linux_amd64.tar.gz
+
+    - name: "Generate the skills archive"
+      shell: bash
+      run: |
+        # Make a temp directory in the relative working directory
+        mkdir -p tmp/
+
+    - name: "Pull the default Actions repositories"
+      shell: bash
+      run: |
+        # Sync all of github.com/skills
+        curl -s https://api.github.com/orgs/skills/repos | jq -r '.[].full_name' | while read -r line ; do
+            bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
+        done
+
+        # Sync dependencies for the Skills organization
+        grep -v '^#' skills-dependencies.txt | while read -r line ; do
+            bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
+        done
+
+    - name: "Pull any additional Actions repositories"
+      if: ${{ inputs.list_file }}
+      shell: bash
+      run: |
+        # Sync any additional Actions repositories
+        grep -v '^#' ${{ inputs.list_file }}} | while read -r line ; do
+            bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
+        done
+
+    - name: "Tar it all up"
+      shell: bash
+      run: |
+        # Tarball everything in tmp directory
+        tar -czf teleport-archive.tar.gz -C tmp/ .
+
+        # Remove temp directory
+        rm -rf tmp/
+
+    - name: "Upload the archive"
+      uses: actions/upload-artifact@v3
+      with:
+        path: |
+          teleport-archive.tar.gz
+        if-no-files-found: error
