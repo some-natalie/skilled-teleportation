@@ -51,7 +51,7 @@ runs:
         # Sync dependencies for the Skills organization
         pwd
         ls -la
-        bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file skill-dependencies.txt
+        bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file skills-dependencies.txt
 
     - name: "Pull any additional Actions repositories"
       if: ${{ inputs.list_file }}
