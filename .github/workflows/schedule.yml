@@ -1,0 +1,15 @@
+name: Export github.com/skills
+
+on:
+  workflow_dispatch: # run on demand
+  schedule:
+    - cron: "15 4 * * 0" # run every Sunday at 4:15am
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # use the GitHub hosted runners
+    steps:
+      - name: Create the latest archive
+        uses: some-natalie/skilled-teleportation@main
+        with:
+          list_file: scripts/extra-actions.txt
