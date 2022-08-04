@@ -1,0 +1,7 @@
+# This file
+# - lists only dependencies for things in github.com/skills as of August 2022
+# - ignores everything starting with a '#'
+# - can and should be edited to add dependencies for your company's needs!
+# - just has the one entry below by default for testing :)
+
+some-natalie/ghas-to-csv
