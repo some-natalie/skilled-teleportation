@@ -51,14 +51,14 @@ runs:
         # Sync dependencies for the Skills organization
         pwd
         ls -la
-        bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file skill-dependencies.txt
+        bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file ${{ GITHUB_WORKSPACE }}/skill-dependencies.txt
 
     - name: "Pull any additional Actions repositories"
       if: ${{ inputs.list_file }}
       shell: bash
       run: |
         # Sync any additional Actions repositories
-        bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file ${{ inputs.list_file }}
+        bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file ${{ GITHUB_WORKSPACE }}/${{ inputs.list_file }}
 
     - name: "Tar it all up"
       shell: bash
