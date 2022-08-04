@@ -24,9 +24,9 @@ runs:
       run: |
         # get the latest release
         curl \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: token ${{ github.token }}" \
-          https://api.github.com/repos/actions/actions-sync/releases/latest | \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ github.token }}" \
+            https://api.github.com/repos/actions/actions-sync/releases/latest | \
         jq -r '.assets[].browser_download_url' | \
         grep "linux_amd64" | \
         xargs wget
@@ -62,18 +62,10 @@ runs:
             bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
         done
 
-    - name: "Tar it all up"
-      shell: bash
-      run: |
-        # Tarball everything in tmp directory
-        tar -czf teleport-archive.tar.gz -C tmp/ .
-
-        # Remove temp directory
-        rm -rf tmp/
-
-    - name: "Upload the archive"
+    - name: "Upload the zip archive"
       uses: actions/upload-artifact@v3
       with:
+        name: "teleport-archive"
         path: |
-          teleport-archive.tar.gz
+          tmp/*
         if-no-files-found: error
