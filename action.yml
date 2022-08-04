@@ -49,6 +49,8 @@ runs:
         done
 
         # Sync dependencies for the Skills organization
+        pwd
+        ls -la
         bin/actions-sync pull --cache-dir tmp/ --repo-name-list-file skill-dependencies.txt
 
     - name: "Pull any additional Actions repositories"
