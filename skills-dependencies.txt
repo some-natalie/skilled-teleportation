@@ -1,0 +1,19 @@
+# This file
+# - lists only dependencies for things in github.com/skills as of August 2022
+# - ignores everything starting with a '#'
+
+# GitHub Actions (github.com/actions)
+actions/checkout
+actions/setup-node
+actions/setup-python
+actions/download-artifact
+actions/upload-artifact
+
+# Docker
+docker/login-action
+docker/build-push-action
+
+# Azure
+azure/login
+azure/docker-login
+azure/webapps-deploy
