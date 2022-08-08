@@ -1,11 +1,15 @@
 name: "Skilled Teleportation"
-description: "Generate an archive of GitHub Skills to move to GitHub Enterprise Server."
+description: "Generate an archive of GitHub Actions to move to GitHub Enterprise Server."
 author: "Natalie Somersall (@some-natalie)"
 branding:
   color: green
   icon: book-open
 
 inputs:
+  sync_skills:
+    description: "Whether to sync skills from the github.com/skills repository."
+    default: "true"
+    required: false
   list_file:
     description: "The list of additional skills to export."
     required: false
@@ -34,13 +38,14 @@ runs:
         # untar the release
         tar -xzf *_linux_amd64.tar.gz
 
-    - name: "Generate the skills archive"
+    - name: "Setup the cache directory"
       shell: bash
       run: |
         # Make a temp directory in the relative working directory
         mkdir -p tmp/
 
-    - name: "Pull the default Actions repositories"
+    - name: "Pull the GitHub Skills repositories"
+      if: ${{ inputs.sync_skills != "true" }}
       shell: bash
       run: |
         # Sync all of github.com/skills

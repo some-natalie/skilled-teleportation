@@ -5,7 +5,6 @@
 # GitHub Actions (github.com/actions)
 actions/checkout
 actions/setup-node
-actions/setup-python
 actions/download-artifact
 actions/upload-artifact
 
