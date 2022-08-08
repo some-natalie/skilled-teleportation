@@ -14,7 +14,7 @@ You have two paths here, a hard one and a slightly harder one.  Either way, you'
 
 Create a new repository in GitHub.com, then create an [`extra-actions.txt`](extra-actions.txt) file to suit your company's needs.  Create a workflow file in `.github/workflows/skills.yml`, example below.  
 
-    ```yaml
+    ```yml
     name: Export github.com/skills
 
     on:
