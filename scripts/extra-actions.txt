@@ -4,4 +4,4 @@
 # - can and should be edited to add dependencies for your company's needs!
 # - just has the one entry below by default for testing :)
 
-some-natalie/ghas-to-csv
+actions/first-interaction
