@@ -37,7 +37,7 @@ Run the workflow and then download the latest artifact, like shown below:
 The latest version of [actions-sync](https://github.com/actions/actions-sync) is in there, as is the script [`teleport-push.sh`](scripts/teleport-push.sh).  Examine/scan/etc everything in the zip file, fling it to the other side where your GHES instance is, then run the script as follows:
 
 ```shell
-./teleport-push.sh teleport-archive.zip "https://github.yourcompany.com" "SOME-GITHUB-TOKEN"
+./teleport-push.sh "https://github.yourcompany.com" "SOME-GITHUB-TOKEN"
 ```
 
 ### The slightly harder way
