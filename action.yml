@@ -45,7 +45,7 @@ runs:
         mkdir -p tmp/
 
     - name: "Pull the GitHub Skills repositories"
-      if: inputs.sync_skills != "true"
+      if: ${{ inputs.sync_skills }} = "true"
       shell: bash
       run: |
         # Sync all of github.com/skills
