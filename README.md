@@ -12,7 +12,7 @@ You have two paths here, a hard one and a slightly harder one.  Either way, you'
 
 ### The hard way
 
-Go to the latest [workflow](https://github.com/some-natalie/skilled-teleportation/actions) and download the latest artifact, like shown below:
+Create a new repository in GitHub.com, then create an [`extra-actions.txt`](extra-actions.txt) file to suit your company's needs.  Create a workflow, like in [this example](.github/workflows/schedule.yml).  Run the workflow and then download the latest artifact, like shown below:
 
 ![artifact-download](images/artifact-download.png)
 
@@ -25,7 +25,7 @@ The latest version of [actions-sync](https://github.com/actions/actions-sync) is
 ### The slightly harder way
 
 1. Download [actions-sync](https://github.com/actions/actions-sync) on the machine that pulls from GitHub.com and the machine that pushes into GHES.
-1. Create a list of Actions to sync over.  This Action just pulls over everything in [github.com/skills](https://github.com/skills), plus dependencies defined in [`skills-dependencies.txt`](skills-dependencies.txt) and anything extra in [`extra-actions.txt`](scripts/extra-actions.txt).  You can use the [`teleport-pull.sh`](scripts/teleport-pull.sh) script to do this if you'd like.
+1. Create a list of Actions to sync over.  This Action just pulls over everything in [github.com/skills](https://github.com/skills), plus dependencies defined in [`skills-dependencies.txt`](skills-dependencies.txt) and anything extra in [`extra-actions.txt`](extra-actions.txt).  You can use the [`teleport-pull.sh`](scripts/teleport-pull.sh) script to do this if you'd like.
 1. Tarball the whole thing up.
 1. Untar it on the other side, then push the Actions into GHES.  You can use the [`teleport-push.sh`](scripts/teleport-push.sh) script to do this if you'd like.
 1. If needed, change each repo that needs to be a template (such as the Skills repositories).
