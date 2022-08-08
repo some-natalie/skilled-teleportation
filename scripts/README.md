@@ -24,9 +24,8 @@ Then to push it to GitHub Enterprise Server:
 
 ```shell
 ./teleport-push.sh \
-    teleport-archive.tar.gz \
-    https://github.yourcompany.com \
-    github_token_goes_here
+    "https://github.yourcompany.com" \
+    "github_token_goes_here"
 ```
 
 It assumes that the token you give it has the ability to create organizations if needed, and write access to all the organizations you have already synced prior.

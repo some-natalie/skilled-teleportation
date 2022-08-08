@@ -13,12 +13,12 @@ curl -s https://api.github.com/orgs/skills/repos | jq -r '.[].full_name' | while
 done
 
 # Sync what's in the list of dependencies Actions
-grep -v '^#' ../skills-dependencies.txt | while read -r line ; do
+grep -v '^#' ../skills-dependencies.txt | grep . | while read -r line ; do
     actions-sync pull --cache-dir tmp/ --repo-name "$line"
 done
 
 # Sync what's in the list of other Actions
-grep -v '^#' extra-actions.txt | while read -r line ; do
+grep -v '^#' ../extra-actions.txt | grep . | while read -r line ; do
     actions-sync pull --cache-dir tmp/ --repo-name "$line"
 done
 
