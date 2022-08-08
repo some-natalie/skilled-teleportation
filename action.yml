@@ -67,6 +67,18 @@ runs:
             bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
         done
 
+    - name: "Copy the actions-sync utility into the cache dir"
+      shell: bash
+      run: |
+        cp bin/actions-sync tmp/
+        chmod +x tmp/actions-sync
+
+    - name: "Copy in the push script"
+      shell: bash
+      run: |
+        cp scripts/teleport-push.sh tmp/
+        chmod +x tmp/teleport-push.sh
+
     - name: "Upload the zip archive"
       uses: actions/upload-artifact@v3
       with:
