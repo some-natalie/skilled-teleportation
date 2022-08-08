@@ -12,7 +12,6 @@ inputs:
     required: false
   list_file:
     description: "The list of additional skills to export."
-    default: "extra-actions.txt"
     required: false
 
 runs:

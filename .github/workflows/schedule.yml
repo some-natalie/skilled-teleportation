@@ -12,4 +12,4 @@ jobs:
       - name: Create the latest archive
         uses: some-natalie/skilled-teleportation@main
         with:
-          list_file: scripts/extra-actions.txt
+          list_file: extra-actions.txt
