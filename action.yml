@@ -7,7 +7,7 @@ branding:
 
 inputs:
   sync_skills:
-    description: "Whether to sync skills from the github.com/skills repository."
+    description: "Whether to sync skills from the github.com/skills repository.  Set this to 'false' to skip Skills."
     default: "true"
     required: false
   list_file:
@@ -45,7 +45,7 @@ runs:
         mkdir -p tmp/
 
     - name: "Pull the GitHub Skills repositories"
-      if: ${{ inputs.sync_skills != "true" }}
+      if: inputs.sync_skills != "true"
       shell: bash
       run: |
         # Sync all of github.com/skills
