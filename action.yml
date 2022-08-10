@@ -7,7 +7,15 @@ branding:
 
 inputs:
   sync_skills:
-    description: "Whether to sync skills from the github.com/skills repository.  Set this to 'false' to skip Skills."
+    description: "Whether to sync skills from the github.com/skills organization.  Set this to 'false' to skip Skills."
+    default: "true"
+    required: false
+  sync_setup:
+    description: "Whether to sync the setup-LANGUAGE actions from the github.com/actions organization.  Set this to 'false' to skip."
+    default: "true"
+    required: false
+  sync_templates:
+    description: "Whether to sync the get started templates from the github.com/actions organization.  Set this to 'false' to skip."
     default: "true"
     required: false
   list_file:
@@ -55,6 +63,26 @@ runs:
 
         # Sync dependencies for the Skills organization
         grep -v '^#' skills-dependencies.txt | grep . | while read -r line ; do
+            bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
+        done
+
+    - name: "Pull the setup-language repositories"
+      if: ${{ inputs.sync_setup }} = "true"
+      shell: bash
+      run: |
+        # Sync all of github.com/actions/setup-*
+        curl -s https://api.github.com/orgs/actions/repos | jq -r '.[].name' | while read -r line ; do
+            if [[ "$line" == "setup-*" ]]; then
+                bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
+            fi
+        done
+
+    - name: "Pull the template Actions repositories"
+      if: ${{ inputs.sync_templates }} = "true"
+      shell: bash
+      run: |
+        # Sync all of github.com/actions templates
+        grep -v '^#' template-actions.txt | grep . | while read -r line ; do
             bin/actions-sync pull --cache-dir tmp/ --repo-name "$line"
         done
 

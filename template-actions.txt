@@ -1,0 +1,10 @@
+# This file
+# - lists all of the template Actions in github.com/actions of August 2022
+# - ignores everything starting with a '#'
+
+actions/typescript-action
+actions/javascript-action
+actions/hello-world-docker-action
+actions/hello-world-javascript-action
+actions/container-action
+actions/container-toolkit-action

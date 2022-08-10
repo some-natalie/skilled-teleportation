@@ -15,3 +15,10 @@ actions-sync push --cache-dir "." --destination-url "$1" --destination-token "$2
 curl -s "$1"/api/v3/orgs/skills/repos --header "Authorization: token $2" | jq -r '.[].full_name' | while read -r line ; do
     curl -sS -X PATCH "$1"/api/v3/repos/"$line" --header "Authorization: token $2" --data '{"is_template":true}'
 done
+
+# Make the starter Actions templates
+starters=("typescript-action" "javascript-action" "hello-world-docker-action" "hello-world-javascript-action" "container-action" "container-toolkit-action")
+
+for i in "${starters[@]}" ; do
+    curl -sS -X PATCH "$1"/api/v3/repos/actions/"$i" --header "Authorization: token $2" --data '{"is_template":true}' || true
+done
