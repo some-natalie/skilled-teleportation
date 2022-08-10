@@ -9,7 +9,7 @@
 # $2: The GHES token to use (e.g. "ghp_123456789")
 
 # For each directory in the archive, sync the Actions to GHES
-actions-sync push --cache-dir "." --destination-url "$1" --destination-token "$2"
+actions-sync push --cache-dir "./cache" --destination-url "$1" --destination-token "$2"
 
 # Make the skills repositories templates
 curl -s "$1"/api/v3/orgs/skills/repos --header "Authorization: token $2" | jq -r '.[].full_name' | while read -r line ; do
