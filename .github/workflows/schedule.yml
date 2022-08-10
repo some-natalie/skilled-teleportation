@@ -1,4 +1,4 @@
-name: Export github.com/skills
+name: Pack the go bag 🎉
 
 on:
   workflow_dispatch: # run on demand
