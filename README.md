@@ -12,10 +12,10 @@ You have two paths here, a hard one and a slightly harder one.  Either way, you'
 
 ### The hard way
 
-Create a new repository in GitHub.com, then create an [`extra-actions.txt`](extra-actions.txt) file to suit your company's needs.  Create a workflow file in `.github/workflows/skills.yml`, example below.  
+Create a new repository in GitHub.com, then (optionally) create an [`extra-actions.txt`](extra-actions.txt) file to suit your company's needs.  Create a workflow file in `.github/workflows/skills.yml`, example below.
 
 ```yaml
-name: Export github.com/skills
+name: Bundle GitHub Actions to sync
 
 on:
   workflow_dispatch: # run on demand
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest # use the GitHub hosted runners
     steps:
       - name: Create the latest archive
-        uses: some-natalie/skilled-teleportation@main
+        uses: some-natalie/skilled-teleportation@v2
         with:
           list_file: extra-actions.txt
 ```
