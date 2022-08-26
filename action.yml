@@ -61,6 +61,9 @@ runs:
             bin/actions-sync pull --cache-dir tmp/cache --repo-name "$line"
         done
 
+        # Get the list of dependencies for the Skills organization
+        curl https://raw.githubusercontent.com/some-natalie/skilled-teleportation/v1/skills-dependencies.txt -o skills-dependencies.txt -s
+
         # Sync dependencies for the Skills organization
         grep -v '^#' skills-dependencies.txt | grep . | while read -r line ; do
             bin/actions-sync pull --cache-dir tmp/cache --repo-name "$line"
@@ -81,6 +84,9 @@ runs:
       if: ${{ inputs.sync_templates }} = "true"
       shell: bash
       run: |
+        # Get the list of template repositories
+        curl https://raw.githubusercontent.com/some-natalie/skilled-teleportation/v1/template-actions.txt -o template-actions.txt -s
+
         # Sync all of github.com/actions templates
         grep -v '^#' template-actions.txt | grep . | while read -r line ; do
             bin/actions-sync pull --cache-dir tmp/cache --repo-name "$line"
@@ -104,7 +110,8 @@ runs:
     - name: "Copy in the push script"
       shell: bash
       run: |
-        cp scripts/teleport-push.sh tmp/
+        curl https://raw.githubusercontent.com/some-natalie/skilled-teleportation/v1/scripts/teleport-push.sh -o teleport-push.sh -s
+        cp teleport-push.sh tmp/
         chmod +x tmp/teleport-push.sh
 
     - name: "Upload the zip archive"
