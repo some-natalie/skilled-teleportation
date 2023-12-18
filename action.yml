@@ -115,7 +115,7 @@ runs:
         chmod +x tmp/teleport-push.sh
 
     - name: "Upload the zip archive"
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: "teleport-archive"
         path: |
